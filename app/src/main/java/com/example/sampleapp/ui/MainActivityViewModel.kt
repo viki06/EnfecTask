@@ -26,14 +26,18 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
 
         _isLoading.postValue(true)
 
-        try {
+        viewModelScope.launch(Dispatchers.IO) {
 
-            viewModelScope.launch(Dispatchers.IO) {
+            try {
+
                 processData(repository.getImageData())
+
+            } catch (throwable: Throwable) {
+
+                processError(throwable)
+
             }
 
-        } catch (throwable: Throwable) {
-            processError(throwable)
         }
 
     }

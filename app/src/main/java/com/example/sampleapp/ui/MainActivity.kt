@@ -36,16 +36,30 @@ class MainActivity : AppCompatActivity() {
 
         addDataObserver()
 
+        addOnClickListener()
+
+    }
+
+    private fun addOnClickListener() {
+
+        mBinding.actionRetry.setOnClickListener {
+
+            mViewModel.getImageData()
+
+        }
+
     }
 
     private fun addDataObserver() {
 
         mViewModel.isLoading.observe(this) { loadingState ->
 
-            mBinding.progressBar.visibility =  if (loadingState) View.VISIBLE else View.GONE
+            mBinding.progressBar.visibility = if (loadingState) View.VISIBLE else View.GONE
         }
 
         mViewModel.imageList.observe(this) { imageList ->
+
+            mBinding.noDataView.visibility = View.GONE
 
             mAdapter.setData(imageList)
 
@@ -54,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         mViewModel.errorFeedback.observe(this) { msg ->
 
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+            mBinding.noDataView.visibility = View.VISIBLE
 
         }
 

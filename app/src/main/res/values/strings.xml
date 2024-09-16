@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SampleApp</string>
+    <string name="app_name">Enfec TAsk</string>
+    <string name="txt_no_data_available">No data Available</string>
+    <string name="action_try_again">Try Again</string>
 </resources>
