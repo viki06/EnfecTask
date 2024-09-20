@@ -6,14 +6,17 @@ import com.example.sampleapp.network.NoConnectionException
 import retrofit2.Response
 import javax.inject.Inject
 
-class Repository @Inject constructor (private val apiController: ApiController) {
+class Repository @Inject constructor(private val apiController: ApiController) {
 
     suspend fun getImageData(): MutableList<Model.ImageData> =
         processResponse(apiController.getImageData())
 
-    private fun processResponse(
-        response: Response<MutableList<Model.ImageData>>
-    ): MutableList<Model.ImageData> {
+    suspend fun getUserData(): MutableList<Model.User> =
+        processResponse(apiController.getUserData())
+
+    private fun <T> processResponse(
+        response: Response<T>
+    ): T {
 
         val responseData = response.body()
 

@@ -10,4 +10,8 @@ interface ApiController {
     suspend fun getImageData() : Response<MutableList<Model.ImageData>>
 
 
+    @GET("users")
+    suspend fun getUserData() : Response<MutableList<Model.User>>
+
+
 }

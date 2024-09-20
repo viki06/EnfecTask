@@ -1,38 +1,38 @@
-package com.example.sampleapp.ui
+package com.example.sampleapp.ui.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.example.sampleapp.databinding.ActivityMainBinding
+import com.example.sampleapp.R
+import com.example.sampleapp.databinding.ActivityUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class UserListActivity : AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
+    private var _binding: ActivityUserListBinding? = null
 
     private val mBinding get() = _binding!!
 
-    private val mViewModel: MainActivityViewModel by viewModels()
+    private val mViewModel: UserListViewModel by viewModels()
 
     @Inject
-    lateinit var mAdapter: ImageRecyclerAdapter
+    lateinit var userListAdapter: UserListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityUserListBinding.inflate(layoutInflater)
 
         setContentView(mBinding.root)
 
-        mBinding.recyclerView.adapter = mAdapter
+        mBinding.recyclerView.adapter = userListAdapter
 
-        mViewModel.getImageData()
+        mViewModel.getUserData()
 
         addDataObserver()
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.noDataView.actionRetry.setOnClickListener {
 
-            mViewModel.getImageData()
+            mViewModel.getUserData()
 
         }
 
@@ -52,16 +52,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun addDataObserver() {
 
-        mViewModel.isLoading.observe(this) { loadingState ->
+        mViewModel.isLoading.observe(this) { showLoader ->
 
-            mBinding.progressBarView.progressBar.visibility = if (loadingState) View.VISIBLE else View.GONE
+            mBinding.progressBarView.progressBar.visibility = if (showLoader) View.VISIBLE else View.GONE
+
         }
 
-        mViewModel.imageList.observe(this) { imageList ->
+        mViewModel.userData.observe(this){ userList ->
 
             mBinding.noDataView.noData.visibility = View.GONE
 
-            mAdapter.setData(imageList)
+            userListAdapter.setData(userList)
 
         }
 
@@ -74,6 +75,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
 }

@@ -7,6 +7,7 @@ import com.example.sampleapp.network.ApiController
 import com.example.sampleapp.network.RetrofitClient
 import com.example.sampleapp.repository.Repository
 import com.example.sampleapp.ui.ImageRecyclerAdapter
+import com.example.sampleapp.ui.user.UserListAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,8 @@ class AppModule {
 
     @Provides
     fun provideImageAdapter() = ImageRecyclerAdapter()
+
+    @Provides
+    fun provideUserAdapter() = UserListAdapter()
 
 }
