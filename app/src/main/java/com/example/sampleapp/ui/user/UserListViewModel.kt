@@ -46,6 +46,4 @@ class UserListViewModel @Inject constructor(private val repository: Repository) 
 
     }
 
-
-
 }

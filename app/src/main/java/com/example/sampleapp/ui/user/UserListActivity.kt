@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.example.sampleapp.R
 import com.example.sampleapp.databinding.ActivityUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

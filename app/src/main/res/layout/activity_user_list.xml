@@ -17,6 +17,4 @@
 
     <include android:id="@+id/progressBarView" layout="@layout/progress_bar_view"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

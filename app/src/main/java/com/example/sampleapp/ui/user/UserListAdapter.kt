@@ -1,8 +1,10 @@
 package com.example.sampleapp.ui.user
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sampleapp.R
 import com.example.sampleapp.databinding.ItemUserBinding
 import com.example.sampleapp.model.Model
 
@@ -10,6 +12,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     private var userList = mutableListOf<Model.User>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(list: MutableList<Model.User>) {
 
         userList = list
@@ -37,8 +40,11 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
                 binding.userID.text = user.id.toString()
 
-                binding.latAndLong.text =
-                    "Lat : ${user.address.geo.lat} Lng : ${user.address.geo.lng}"
+                binding.latAndLong.text = holder.itemView.context.getString(
+                    R.string.prefix_lat_lng,
+                    user.address.geo.lat,
+                    user.address.geo.lng
+                )
 
                 binding.companyName.text = user.company.name
 
